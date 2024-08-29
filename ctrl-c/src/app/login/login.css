@@ -1,0 +1,97 @@
+
+body {
+  background-color: #93E9BE; 
+  margin: 0; 
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h1 {
+  text-align: left;
+  margin: 0;
+  font-size: 36px;
+  color: #333;
+}
+
+.BlueBox {
+  background-color: #92B5D8;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 1000px; 
+  height: auto;
+  padding: 50px; 
+  display: flex;
+  justify-content: space-between;
+}
+
+.LoginText {
+  font-size: 25px;
+}
+
+.WhiteBox {
+  background-color: white;
+  width: 500px;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs {
+  background-color: white; 
+  border: 2px solid black; 
+  border-radius: 5px; 
+  padding: 10px 50px; 
+  font-size: 16px; 
+  margin-top: 10px;
+  cursor: pointer; 
+}
+
+.label-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  margin-bottom: 15px; 
+}
+
+.label-input-container label {
+  margin-bottom: 5px; 
+  text-align: left; 
+}
+
+.LoginButton {
+  background-color: white; 
+  border: 2px solid black; 
+  margin-top: 20px;
+  border-radius: 5px; 
+  padding: 10px 50px;
+  width: 100%;  
+  font-size: 16px; 
+  cursor: pointer; 
+}
+
+.LoginButton:hover{
+  background-color: rgba(0, 0, 0, 0.183);
+  opacity: 0.8;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.links a {
+  display: block;
+  color: #333;
+  font-size: 0.8em;
+  text-decoration: none;
+  margin: 5px 0;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
