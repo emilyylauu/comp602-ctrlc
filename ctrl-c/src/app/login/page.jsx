@@ -1,21 +1,27 @@
+"use client";
 import "./login.css";
 import React from "react";
 
-const Page = () => {
+const Login = () => {
   return (
     <div className="BlueBox">
       <div>
         <title>Login Page</title>
       </div>
+      <div>
+        <div className="welcome">
+          <h1>Welcome to Blank Web</h1>
+        </div>
 
-      <h1>Welcome to Blank Web</h1>
+        <img src="/image/logo.png" alt="logo" />
+      </div>
 
       <div className="WhiteBox">
         <h3 className="LoginText">Login</h3>
 
         <div className="label-input-container">
           <label className="text">User/Email</label>
-          <input className="inputs" type="text" placeholder="User/Email" />
+          <input className="inputs" type="email" placeholder="User/Email" />
         </div>
 
         <div className="label-input-container">
@@ -23,7 +29,13 @@ const Page = () => {
           <input className="inputs" type="password" placeholder="Password" />
         </div>
 
-        <button className="LoginButton">Login</button>
+        <button
+          className="LoginButton"
+          onClick={() => (window.location.href = "#")}
+        >
+          Login
+        </button>
+
         <div className="links">
           <a
             href="http://localhost:3000/forgotpass"
@@ -40,4 +52,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Login;
