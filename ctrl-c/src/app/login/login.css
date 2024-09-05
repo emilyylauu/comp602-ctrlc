@@ -8,17 +8,16 @@ body {
   align-items: center;
 } 
 
-.welcome {
+h1 {
   display: flex;
   justify-content: center;
   margin-right: 35px; 
-  font-size: 18px;
   font-weight: 700;
   color: #333;
 }
 
 img {
-  width: 300px; 
+  width: 300px;
   display: block;
 }
 

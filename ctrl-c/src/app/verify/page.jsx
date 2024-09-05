@@ -8,7 +8,14 @@ const Verify = () => {
         <title>Verification Page</title>
       </div>
 
-      <h1>Verification</h1>
+      <div className="whitebox">
+        <img src="/image/verify-100.png" alt="tick" />
+        <h1>Verify your email</h1>
+        <p>
+          We have sent a link to you "user’s email". Please verify to activate
+          your account
+        </p>
+      </div>
 
       <div className="links">
         <a href="http://localhost:3000/login">Back to login</a>
