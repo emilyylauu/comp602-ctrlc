@@ -1,23 +1,59 @@
-"use client";
+'use client'
+
+import { db } from './firebaseconfig.js';
 
 import React, { useRef, useEffect } from "react";
+import { collection, addDoc } from 'firebase/firestore'
 import "./journal.css";
+
+// Corrected function to add data to Firestore
+async function addDataToFireStore(day, month, year, entry) {
+  try {
+    console.log('Attempting to add document:', { day, month, year, entry });
+    const docRef = await addDoc(collection(db, "messages"), {
+      day: day,
+      month: month,
+      year: year,
+      entry: entry,
+    });
+    console.log("Document written with ID: ", docRef.id);
+    return true;
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    return false;
+  }
+}
+
 
 const Journal = () => {
   const dayRef = useRef();
   const monthRef = useRef();
+  const yearRef = useRef(); // Ref for year selection
+  const entryRef = useRef(); // Ref for textarea entry
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const day = Number(dayRef.current.value);
     const month = monthRef.current.value;
+    const year = Number(yearRef.current.value);
+    const entry = entryRef.current.value;
 
-    if ((month === "Feb" && day > 29) || 
+    // Validate date input
+    if ((month === "Feb" && day > 29) ||
         (["Apr", "Jun", "Sep", "Nov"].includes(month) && day > 30)) {
       alert('Please enter a valid date');
-    } else {
+      return;
+    }
+
+    // Save entry to Firestore
+    const success = await addDataToFireStore(day, month, year, entry);
+
+    if (success) {
       alert('Entry has been saved!');
+    } else {
+      alert('Failed to save entry. Please try again.');
     }
   };
+
   return (
     <div className="journal-container">
       <h2 className="journal-header">My Daily Journal</h2>
@@ -49,7 +85,7 @@ const Journal = () => {
           ))}
         </select>
 
-        <select>
+        <select ref={yearRef}>
           {[2024, 2025, 2026, 2027, 2028].map(year => (
             <option key={year} value={year}>{year}</option>
           ))}
@@ -57,10 +93,10 @@ const Journal = () => {
       </div>
 
       {/* Textarea positioned below the image and text */}
-      <textarea placeholder="Type here..."></textarea>
+      <textarea ref={entryRef} placeholder="Type here..."></textarea>
 
       <div className="button-container">
-        <a href="/past-entries ">
+        <a href="/past-entries">
           <button className="button">Past Entries</button>
         </a>
 
@@ -73,6 +109,5 @@ const Journal = () => {
     </div>
   );
 };
-
 
 export default Journal;
