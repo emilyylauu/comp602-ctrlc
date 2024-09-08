@@ -1,72 +1,82 @@
-"use client"; // This directive makes the component a Client Component
+"use client";
 
-import "./pastEntries.css"; 
+import { db } from "./firebaseConfig.js";
+import "./pastEntries.css";
+import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from "react";
 
 const PastEntries = () => {
   const [entries, setEntries] = useState([]);
 
-  // Handle change of entry content
-  const handleChange = (id, newContent) => {
-    setEntries((prevEntries) =>
-      prevEntries.map((entry) =>
-        entry.id === id ? { ...entry, content: newContent } : entry
-      )
-    );
-  };
-  
-  // Handle edit mode toggle
-  const handleEditToggle = (id) => {
-    setEntries((prevEntries) =>
-      prevEntries.map((entry) =>
-        entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
-      )
-    );
+  // Fetch entries from Firestore when the component loads
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "messages"));
+        const entriesList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setEntries(entriesList);
+      } catch (error) {
+        console.error("Error fetching entries:", error);
+      }
+    };
+
+    fetchEntries();
+  }, []);
+
+  // Toggle edit mode for an entry
+  const toggleEdit = (id) => {
+    setEntries(entries.map(entry => 
+      entry.id === id ? { ...entry, isEditing: !entry.isEditing } : entry
+    ));
   };
 
-  // Handle delete actions
-  const handleDelete = (id) => {
-    setEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== id));
-    alert(`Are you sure you want to delete this entry?`); 
+  // Update entry content in state and Firestore
+  const updateEntry = async (id, newContent) => {
+    setEntries(entries.map(entry => 
+      entry.id === id ? { ...entry, entry: newContent } : entry
+    ));
+
+    // Update Firestore with the new content
+    try {
+      await updateDoc(doc(db, "messages", id), { entry: newContent });
+    } catch (error) {
+      console.error("Error updating entry:", error);
+    }
+  };
+
+  // Delete an entry from state and Firestore
+  const deleteEntry = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this entry?")) return;
+
+    setEntries(entries.filter(entry => entry.id !== id));
+
+    // Delete entry from Firestore
+    try {
+      await deleteDoc(doc(db, "messages", id));
+    } catch (error) {
+      console.error("Error deleting entry:", error);
+    }
   };
 
   return (
     <div className="past-entries-container">
-      <h1 className="past-entries-header">Past Entries</h1>
-
+      <h1>Past Entries</h1>
       <div className="display-container">
-        {entries.map((entry) => (
+        {entries.map(entry => (
           <div key={entry.id} className="entry-item">
-            <p className="display">Date: {entry.date}</p>
+            <p>Date: {entry.day} {entry.month}, {entry.year}</p>
             {entry.isEditing ? (
-              <textarea 
-                className="edit-textarea" 
-                value={entry.content} 
-                onChange={(e) => handleChange(entry.id, e.target.value)} 
-              />
+              <textarea value={entry.entry} onChange={(e) => updateEntry(entry.id, e.target.value)} />
             ) : (
-              <p className="display">{entry.content}</p>
+              <p>{entry.entry}</p>
             )}
-            <div className="button-group">
-              {entry.isEditing ? (
-                <button 
-                  className="button save-button"
-                  onClick={() => handleEditToggle(entry.id)}> Save </button>
-              ) : (
-                <button 
-                  className="button edit-button"
-                  onClick={() => handleEditToggle(entry.id)}> Edit</button>
-              )}
-              <button 
-                className="button delete-button" 
-                onClick={() => handleDelete(entry.id)}>Delete </button>
-            </div>
+            <button onClick={() => toggleEdit(entry.id)}>{entry.isEditing ? "Save" : "Edit"}</button>
+            <button onClick={() => deleteEntry(entry.id)}>Delete</button>
           </div>
         ))}
       </div>
-
       <a href="/journal">
-        <button className="button">Back to Journal</button>
+        <button>Back to Journal</button>
       </a>
     </div>
   );

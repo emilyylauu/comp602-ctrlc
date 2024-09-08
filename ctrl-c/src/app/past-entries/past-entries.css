@@ -3,17 +3,12 @@ body {
     display: flex;
     justify-content: center;
 }
+
+
 .past-entries-header {
-    background-color: #7d4c7d; 
-    color: white;
     padding: 10px 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 18px;
     margin-bottom: 10px;
 }
-
-
 
 button,
 a.button {    
@@ -22,20 +17,22 @@ a.button {
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
-    text-align: center;
+
 }
-.past-entries-container{
+
+.past-entries-container {
     width: 1100px;
     background-color: #92B5D8; 
     border-radius: 10px;
     padding: 20px;
     height: 90vh;
-    
+
 }
 
-.display-container{
-background-color: white;
-height:auto;
-border-radius: 20px;
-margin : 40px;
+.display-container {
+    background-color: white;
+    border-radius: 20px;
+    margin: 40px 0 40px 60px; 
+    padding: 15px; 
+
 }
