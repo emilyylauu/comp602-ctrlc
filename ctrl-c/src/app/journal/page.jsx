@@ -61,7 +61,7 @@ const Journal = () => {
       <div className="journal-content">
         {/* Image on the left */}
         <div className="image-container">
-          <img src="/images/Unwind_Your_Mind_Play_Journal_Relax.png" width="200" alt="Journal Image" />
+          <img src="/images/distraction.png" width="270" alt="Journal Image" />
         </div>
         
         {/* Paragraph on the right */}
