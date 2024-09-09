@@ -1,6 +1,7 @@
 "use client";
 
-import { db } from "./firebaseConfig.js";
+import { db } from '../firebase/firebaseConfig'; // Navigate up one level, then into firebase
+
 import "./pastEntries.css";
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from "react";
