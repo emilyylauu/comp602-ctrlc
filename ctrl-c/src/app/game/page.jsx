@@ -1,234 +1,265 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import "./pong.css";
 
-const PongGame = () => {
+const Pong = () => {
   const canvasRef = useRef(null);
-  const requestRef = useRef(null);
+  const [paddleHeight] = useState(100);
+  const [paddleWidth] = useState(10);
+  const [ballSize] = useState(20);
+  const [playerY, setPlayerY] = useState(0);
+  const [computerY, setComputerY] = useState(0);
+  const [ball, setBall] = useState({ x: 10, y: 10, dx: 5, dy: 7 });
+  const [playerScore, setPlayerScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
+  const [isGameRunning, setIsGameRunning] = useState(false);
+  const [isGamePaused, setIsGamePaused] = useState(false);
+  const [showText, setShowText] = useState(true);
+  const [showRestartConfirm, setShowRestartConfirm] = useState(false);
 
-  // Paddle and ball refs for game mechanics
-  const userPaddleRef = useRef({ x: 0, y: 0, width: 18, height: 120 });
-  const comPaddleRef = useRef({ x: 0, y: 0, width: 18, height: 120 });
-  const ballRef = useRef({
-    x: 0,
-    y: 0,
-    radius: 12,
-    velocityX: 5, // Slightly slower initial velocity
-    velocityY: 5,
-    speed: 5, // Slower initial speed
-  });
+  useEffect(() => {
+    if (!isGameRunning || isGamePaused) return;
 
-  const [userScore, setUserScore] = useState(0);
-  const [comScore, setComScore] = useState(0);
-
-  const initialBallSpeed = 5; // Reduced speed, but not too slow
-  const maxBallSpeed = 15; // Slightly reduced max speed
-  const paddleWidth = 18;
-  const paddleHeight = 120;
-  const netWidth = 5;
-  const netColor = "WHITE";
-  const [gamePaused, setGamePaused] = useState(true);
-  const [onPausePage, setOnPausePage] = useState(false);
-
-  // Initialize canvas and objects when window resizes
-  const resizeCanvas = () => {
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    const context = canvas.getContext("2d");
 
-    userPaddleRef.current.x = 0;
-    userPaddleRef.current.y = canvas.height / 2 - paddleHeight / 2;
+    let animationFrameId;
 
-    comPaddleRef.current.x = canvas.width - paddleWidth;
-    comPaddleRef.current.y = canvas.height / 2 - paddleHeight / 2;
+    const update = () => {
+      let { x, y, dx, dy } = ball;
+      x += dx;
+      y += dy;
 
-    resetBall();
-  };
+      if (y < 0 || y > canvas.height - ballSize) dy *= -1;
 
-  // Reset the ball position
-  const resetBall = () => {
-    const canvas = canvasRef.current;
-    ballRef.current = {
-      x: canvas.width / 2,
-      y: Math.random() * (canvas.height - ballRef.current.radius * 2) + ballRef.current.radius,
-      velocityX: -ballRef.current.velocityX, // Invert direction on reset
-      velocityY: ballRef.current.velocityY,
-      speed: initialBallSpeed,
-      radius: 12,
+      if (x < paddleWidth && y > playerY && y < playerY + paddleHeight) {
+        dx *= -1;
+        x = paddleWidth;
+      }
+
+      if (
+        x > canvas.width - paddleWidth - ballSize &&
+        y > computerY &&
+        y < computerY + paddleHeight
+      ) {
+        dx *= -1;
+        x = canvas.width - paddleWidth - ballSize;
+      }
+
+      if (x < 0) {
+        setComputerScore((score) => score + 1);
+        resetBall();
+        return;
+      } else if (x > canvas.width - ballSize) {
+        setPlayerScore((score) => score + 1);
+        resetBall();
+        return;
+      }
+
+      if (computerY + paddleHeight / 2 < y) {
+        setComputerY(Math.min(computerY + 10, canvas.height - paddleHeight));
+      } else {
+        setComputerY(Math.max(computerY - 4, 0));
+      }
+
+      setBall({ x, y, dx, dy });
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      drawDashedLine(context); // Draw the dashed line
+      drawPaddle(context, 0, playerY);
+      drawPaddle(context, canvas.width - paddleWidth, computerY);
+      drawBall(context, x, y);
+      drawScore(context);
+
+      animationFrameId = requestAnimationFrame(update);
     };
+
+    const drawPaddle = (ctx, x, y) => {
+      ctx.fillStyle = "white";
+      ctx.fillRect(x, y, paddleWidth, paddleHeight);
+    };
+
+    const drawBall = (ctx, x, y) => {
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      ctx.arc(x + ballSize / 2, y + ballSize / 2, ballSize / 2, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    const drawDashedLine = (ctx) => {
+      ctx.setLineDash([10, 10]); // Dash pattern: 10px line, 10px space
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, 0);
+      ctx.lineTo(canvas.width / 2, canvas.height);
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.setLineDash([]); // Reset to solid lines
+    };
+
+    const drawScore = (ctx) => {
+      ctx.fillStyle = "gray"; // Set the color of the score
+      ctx.font = "120px Arial"; // Increase the font size to make the score larger
+      ctx.textAlign = "center"; // Center the text horizontally
+
+      // Display player's score on the left
+      ctx.fillText(playerScore, canvas.width / 4, canvas.height / 5); 
+
+      // Display opponent's score on the right
+      ctx.fillText(computerScore, (3 * canvas.width) / 4, canvas.height / 5); 
+    };
+
+    const resetBall = () => {
+      const canvas = canvasRef.current;
+
+      const randomDirectionX = Math.random() < 0.5 ? -1 : 1;
+      const randomDirectionY = Math.random() < 0.5 ? -1 : 1;
+
+      setBall({
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        dx: randomDirectionX * Math.abs(ball.dx),
+        dy: randomDirectionY * Math.abs(ball.dy),
+      });
+    };
+
+    animationFrameId = requestAnimationFrame(update);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [
+    ball,
+    computerY,
+    playerY,
+    playerScore,
+    computerScore,
+    paddleHeight,
+    paddleWidth,
+    ballSize,
+    isGameRunning,
+    isGamePaused,
+  ]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowUp" && playerY > 0) {
+      setPlayerY(Math.max(playerY - 20, 0));
+    } else if (
+      e.key === "ArrowDown" &&
+      playerY < canvasRef.current.height - paddleHeight
+    ) {
+      setPlayerY(Math.min(playerY + 20, canvasRef.current.height - paddleHeight));
+    }
   };
 
-  // Collision detection between the ball and paddle
-  const collision = (ball, paddle) => {
-    return (
-      ball.x + ball.radius > paddle.x &&
-      ball.x - ball.radius < paddle.x + paddle.width &&
-      ball.y + ball.radius > paddle.y &&
-      ball.y - ball.radius < paddle.y + paddle.height
-    );
-  };
-
-  // Update the ball and paddle positions
-  const update = () => {
+  const handleMouseMove = (e) => {
     const canvas = canvasRef.current;
-    const ball = ballRef.current;
-    const userPaddle = userPaddleRef.current;
-    const comPaddle = comPaddleRef.current;
-
-    // Ball movement
-    ball.x += ball.velocityX;
-    ball.y += ball.velocityY;
-
-    // Ball collision with top or bottom wall
-    if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
-      ball.velocityY = -ball.velocityY;
-    }
-
-    // Ball collision with paddles
-    let paddle = ball.x < canvas.width / 2 ? userPaddle : comPaddle;
-    if (collision(ball, paddle)) {
-      const collidePoint = ball.y - (paddle.y + paddle.height / 2);
-      const angle = (Math.PI / 4) * (collidePoint / (paddle.height / 2));
-      const direction = ball.x < canvas.width / 2 ? 1 : -1;
-
-      // Adjust ball velocity after hitting paddle
-      ball.velocityX = direction * ball.speed * Math.cos(angle);
-      ball.velocityY = ball.speed * Math.sin(angle);
-      ball.speed = Math.min(ball.speed + 0.3, maxBallSpeed); // Increase speed gradually
-    }
-
-    // Ball out of bounds (scoring)
-    if (ball.x - ball.radius < 0) {
-      setComScore((prev) => prev + 1); // Update computer score
-      resetBall();
-    } else if (ball.x + ball.radius > canvas.width) {
-      setUserScore((prev) => prev + 1); // Update user score
-      resetBall();
-    }
-
-    // Move the computer paddle
-    comPaddle.y += (ball.y - (comPaddle.y + comPaddle.height / 2)) * 0.05;
+    const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+    setPlayerY(Math.min(Math.max(mouseY - paddleHeight / 2, 0), canvas.height - paddleHeight));
   };
 
-  // Render the game elements, including updated scores
-  const render = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw background
-    ctx.fillStyle = "BLACK";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw net
-    for (let i = 0; i <= canvas.height; i += 15) {
-      ctx.fillStyle = netColor;
-      ctx.fillRect(canvas.width / 2 - netWidth / 2, i, netWidth, 10);
-    }
-
-    // Draw paddles
-    const userPaddle = userPaddleRef.current;
-    const comPaddle = comPaddleRef.current;
-    ctx.fillStyle = "WHITE";
-    ctx.fillRect(userPaddle.x, userPaddle.y, userPaddle.width, userPaddle.height);
-    ctx.fillRect(comPaddle.x, comPaddle.y, comPaddle.width, comPaddle.height);
-
-    // Draw ball
-    const ball = ballRef.current;
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    ctx.fillStyle = "WHITE";
-    ctx.fill();
-    ctx.closePath();
-
-    // Draw scores (force re-render of canvas to show updated scores)
-    ctx.fillStyle = "GRAY";
-    ctx.font = "120px Courier New";
-    ctx.fillText(userScore, canvas.width / 4, canvas.height / 5); // Update user score
-    ctx.fillText(comScore, (3 * canvas.width) / 4, canvas.height / 5); // Update com score
-  };
-
-  // Game loop
-  const gameLoop = () => {
-    update();
-    render();
-    requestRef.current = requestAnimationFrame(gameLoop);
-  };
-
-  // Mouse movement to control the user paddle
-  const movePaddle = (event) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    userPaddleRef.current.y = event.clientY - rect.top - paddleHeight / 2;
-  };
-
-  // Start the game
-  const startGame = () => {
-    setGamePaused(false);
-    setOnPausePage(false); // Hide pause page if coming from it
-    resetBall();
-    requestRef.current = requestAnimationFrame(gameLoop); // Start game loop
-  };
-
-  // Pause the game
-  const pauseGame = () => {
-    setOnPausePage(true); // Show the pause page
-    cancelAnimationFrame(requestRef.current); // Pause game loop
-  };
-
-  // Continue the game from the pause screen
-  const continueGame = () => {
-    setOnPausePage(false); // Hide pause page
-    requestRef.current = requestAnimationFrame(gameLoop); // Resume game loop
-  };
-
-  // Exit game and go to the start screen
-  const exitGame = () => {
-    setGamePaused(true);
-    setOnPausePage(false); // Exit pause page
-    setUserScore(0); // Reset score
-    setComScore(0);
-    cancelAnimationFrame(requestRef.current); // Stop game loop
-  };
-
-  // Set up the game and handle resizing
   useEffect(() => {
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    if (!isGameRunning || isGamePaused) return;
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("mousemove", handleMouseMove);
+
     return () => {
-      cancelAnimationFrame(requestRef.current);
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [playerY, isGameRunning, isGamePaused]);
+
+  const startGame = () => {
+    setIsGameRunning(true);
+    setIsGamePaused(false);
+    setShowText(false);
+  };
+
+  const pauseGame = () => {
+    setIsGamePaused(true);
+  };
+
+  const resumeGame = () => {
+    setIsGamePaused(false);
+  };
+
+  const confirmRestart = () => {
+    setShowRestartConfirm(true);
+  };
+
+  const handleRestartConfirm = (confirm) => {
+    setShowRestartConfirm(false);
+    if (confirm) {
+      setPlayerScore(0);
+      setComputerScore(0);
+      setBall({ x: 60, y: 60, dx: 4, dy: 4 });
+      setPlayerY(0);
+      setComputerY(0);
+      setIsGamePaused(false);
+      setIsGameRunning(true);
+    }
+  };
+
+  const backToMainMenu = () => {
+    setPlayerScore(0);
+    setComputerScore(0);
+    setBall({ x: 60, y: 60, dx: 4, dy: 4 });
+    setPlayerY(0);
+    setComputerY(0);
+    setIsGamePaused(false);
+    setIsGameRunning(false);
+    setShowText(true);
+  };
+
+  const backToHomePage = () => {
+    window.location.href = "/home-page";
+  };
 
   return (
-    <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", backgroundColor: "black", color: "white" }}>
-      {gamePaused && !onPausePage && (
-        <div id="start-page">
-          <h1 style={{ marginLeft: "20px" }}>Pong Game</h1>
-          <button onClick={startGame} style={{ padding: "10px 20px", fontSize: "20px", backgroundColor: "white", color: "black", cursor: "pointer", margin: "10px" }}>
-            Play
-          </button>
-          <button onClick={() => window.location.reload()} style={{ padding: "10px 20px", fontSize: "20px", backgroundColor: "white", color: "black", cursor: "pointer", margin: "10px" }}>
-            Exit Game
-          </button>
+    <div>
+      {showText && (
+        <div className="main-menu">
+          <h2 className="heading">Pong Game</h2>
+          <p className="welcome-text">Welcome to Pong Game! Use this game as a way to distract your mind through any stressful situation or simply for fun.
+          </p>
+
+          <p className="welcome-text">Use the arrow keys or your mouse to control the paddle.</p>
+          <p className="welcome-text">Press 'Start Game' to begin!</p>
+          <img src="/images/game.png" width="270" alt="Journal Image" />
         </div>
       )}
 
-      {onPausePage && (
-        <div id="pause-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "row", gap: "10px", position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
-          <button onClick={continueGame} style={{ padding: "5px 10px", fontSize: "16px", backgroundColor: "white", color: "black", cursor: "pointer" }}>Continue</button>
-          <button onClick={exitGame} style={{ padding: "5px 10px", fontSize: "16px", backgroundColor: "white", color: "black", cursor: "pointer" }}>Exit Game</button>
+      {!isGameRunning ? (
+        <div className="start-controls">
+          <button onClick={startGame} className="start-button">Start Game</button>
+          <button onClick={backToHomePage} className="back-home-button"> Back to Homepage</button>
+        </div>
+      ) : (
+        !isGamePaused && (
+          <div className="controls">
+            <button onClick={pauseGame} className="pause-button">Pause</button>
+          </div>
+        )
+      )}
+
+      {isGamePaused && (
+        <div className="pause-menu">
+          <h2>Game Paused</h2>
+          <button onClick={resumeGame} className="pause-menu-button">Resume</button>
+          <button onClick={confirmRestart} className="pause-menu-button">Restart</button>
+          <button onClick={backToMainMenu} className="pause-menu-button"> Main Menu</button>
         </div>
       )}
-
-      {!gamePaused && !onPausePage && (
-        <button id="pause-button" onClick={pauseGame} style={{ position: "absolute", top: "10px", left: "50%", transform: "translateX(-50%)", padding: "5px 10px", fontSize: "14px", backgroundColor: "white", color: "black", cursor: "pointer" }}>
-          Pause
-        </button>
+      {showRestartConfirm && (
+        <div className="confirm-dialog">
+          <p>Are you sure you want to restart the game?</p>
+          <button onClick={() => handleRestartConfirm(true)} className="confirm-button">Yes </button>
+          <button onClick={() => handleRestartConfirm(false)} className="confirm-button">No</button>
+        </div>
       )}
-
-      <canvas ref={canvasRef} onMouseMove={movePaddle} style={{ display: gamePaused && !onPausePage ? "none" : "block", backgroundColor: "black" }} />
+      <canvas ref={canvasRef} className="pong-canvas" />
     </div>
   );
 };
-
-export default PongGame;
+export default Pong;
