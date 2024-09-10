@@ -2,14 +2,13 @@
 import "./login.css";
 import React, { useState } from "react";
 import {
-  doSigninUserWithEmailNPassword,
-  doSigninWithGoogle,
+  doSignInWithEmailAndPassword,
+  doSignInWithGoogle,
 } from "../firebase/auth";
-import { useAuth } from "../contexts/authContexts";
+import { useAuth } from "../(contexts)/authContexts";
 
 const Login = () => {
-  const { userLoggedIn } = useAuth();
-
+  const { userLoggedIn } = useAuth;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
@@ -21,7 +20,12 @@ const Login = () => {
     if (!isSigningIn) {
       setIsSigningIn(true);
 
-      await doSigninUserWithEmailNPassword(email, password);
+      try {
+        await doSignInWithEmailAndPassword(email, password);
+      } catch (error) {
+        setErrorMessage(error.message);
+        setIsSigningIn(false);
+      }
     }
   };
 
@@ -30,18 +34,18 @@ const Login = () => {
 
     if (!isSigningIn) {
       setIsSigningIn(true);
-
-      doSigninWithGoogle().catch((err) => {
+      try {
+        await doSignInWithGoogle();
+      } catch (error) {
+        setErrorMessage(error.message); // Display error to the user
         setIsSigningIn(false);
-      });
+      }
     }
   };
 
   return (
     <div>
-      (userLoggedIn %% (
-      <Navigate to={"#"} replace={true} />
-      ))
+      {/* {userLoggedIn && <Navigate to={"/"} replace={true} />} */}
       <div className="BlueBox">
         <div>
           <title>Login Page</title>
@@ -77,6 +81,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+          </div>
+          <div className="label-input-container">
+            <div className="text">Sign In With Google</div>
+            <button className="inputs" onClick={onGoogleSignIn}>
+              Sign In With Google
+            </button>
           </div>
 
           <button

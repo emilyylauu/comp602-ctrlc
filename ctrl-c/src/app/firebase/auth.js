@@ -1,26 +1,31 @@
 import {
   createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  sendEmailVerification,
+  signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  SigninUserWithEmailAndPassword,
+  sendEmailVerification,
+  updatePassword,
   signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
-export const doCreateUserWithEmailNPassword = async (email, password) => {
+export const doCreateUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const doSigninUserWithEmailNPassword = async (email, password) => {
-  return SigninUserWithEmailAndPassword(auth, email, password);
+export const doSignInWithEmailAndPassword = async (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const doSigninWithGoogle = async (email, password) => {
+export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  const resutl = await signInWithPopup(auth, provider);
-  resutl.user;
-  return resutl;
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user; // return the authenticated user
+  } catch (error) {
+    console.error("Error signing in with Google: ", error);
+    throw error; // rethrow the error to handle it in the component
+  }
 };
 
 export const doSignOut = () => {
@@ -31,11 +36,11 @@ export const doPasswordReset = (email) => {
   return sendPasswordResetEmail(auth, email);
 };
 
-export const doPasswordChange = (email) => {
+export const doPasswordChange = (password) => {
   return updatePassword(auth.currentUser, password);
 };
 
-export const doSendEmailVerfication = () => {
+export const doSendEmailVerification = () => {
   return sendEmailVerification(auth.currentUser, {
     url: `${window.location.origin}/home`,
   });
