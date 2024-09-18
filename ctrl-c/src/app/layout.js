@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "./(contexts)/authContexts";
 import Navbar from "./homepage/Components/navbar/Navbar";
 import Footer from "./homepage/Components/footer/Footer";
 import "@fortawesome/fontawesome-svg-core";
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
 			<body className={inter.className}>
 				<div className="container">
 					<Navbar />
-					{children}
+					<AuthProvider>{children}</AuthProvider>
 					<Footer />
 				</div>
 			</body>
