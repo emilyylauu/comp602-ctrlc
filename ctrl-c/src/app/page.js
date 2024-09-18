@@ -1,6 +1,6 @@
 import React from "react";
-import TestHome from "./testhome/TestHome";
-// import { AuthProvider } from "./(contexts)/authContexts";
+import Image from "next/image";
+import styles from "./page.module.css";
 
 const Home = () => {
 	return (
