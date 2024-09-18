@@ -9,7 +9,7 @@ const Pong = () => {
   const [ballSize] = useState(20);
   const [playerY, setPlayerY] = useState(0);
   const [computerY, setComputerY] = useState(0);
-  const [ball, setBall] = useState({ x: 10, y: 10, dx: 5, dy: 7 });
+  const [ball, setBall] = useState({ x: 10, y: 10, dx: 10, dy: 12 });
   const [playerScore, setPlayerScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
   const [isGameRunning, setIsGameRunning] = useState(false);
