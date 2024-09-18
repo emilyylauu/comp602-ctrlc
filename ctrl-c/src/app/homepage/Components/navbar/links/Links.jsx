@@ -64,14 +64,19 @@ const Links = () => {
                     {/* Dropdown menu */}
                     {profileMenuOpen && (
                         <div className={styles.dropdownMenu}>
-                            <h3>UserName<br /><span>@userID</span></h3>
+                            <h3>Username<br /><span>@userID</span></h3>
                             <ul>
-                                <p className={styles.dropdownItem}>
-                                    profile information <br/>bla bla bla
-                                </p>
+                                <li className={styles.dropdownItem}>
+                                    <FontAwesomeIcon icon={faUser} />
+                                    <a href="#">My Profile</a>
+                                </li>
                                 <li className={styles.dropdownItem}>
                                     <FontAwesomeIcon icon={faSignOutAlt} />
                                     <a href="#">Logout</a>
+                                </li>
+                                <li className={styles.dropdownItem}>
+                                    <FontAwesomeIcon icon={faCog} />
+                                    <a href="#">Settings</a>
                                 </li>
                             </ul>
                         </div>
