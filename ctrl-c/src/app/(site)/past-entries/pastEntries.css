@@ -1,0 +1,39 @@
+/* Set the background color of the entire body and center its content */
+body {
+    background-color: #93E9BE; /* Light green background color */
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center content horizontally */
+}
+
+/* Style for the header of past entries section */
+.past-entries-header {
+    padding: 10px 20px; /* Add padding inside the header */
+    margin-bottom: 10px; /* Space below the header */
+}
+
+/* Common styles for buttons and links with the button class */
+button,
+a.button {    
+    background-color: #7d4c7d; /* Dark purple background color */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside the button */
+}
+
+/* Container for past entries with specific dimensions and styling */
+.past-entries-container {
+    width: 1100px; /* Fixed width for the container */
+    background-color: #92B5D8; /* Light blue background color */
+    border-radius: 10px; /* Slightly rounded corners */
+    padding: 20px; /* Padding inside the container */
+    height: 90vh; /* Set height to 90% of the viewport height */
+}
+
+/* Container for displaying individual entries or content */
+.display-container {
+    background-color: white; /* White background for the display area */
+    border-radius: 20px; /* Rounded corners */
+    margin: 40px 0 40px 60px; /* Top, bottom, and left margin */
+    padding: 15px; /* Padding inside the display area */
+}
