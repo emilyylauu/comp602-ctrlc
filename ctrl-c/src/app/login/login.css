@@ -17,8 +17,9 @@ h1 {
 }
 
 img {
-  width: 300px;
+  max-width: 400px;
   display: block;
+  padding-right: 50px;
 }
 
 .BlueBox {
@@ -46,6 +47,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 500px;
 }
 
 .inputs {
@@ -56,6 +58,9 @@ img {
   font-size: 16px; 
   margin-top: 10px;
   cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 
 .label-input-container {
@@ -69,7 +74,10 @@ img {
   margin-bottom: 5px; 
   text-align: left; 
 }
-
+.googleicon{
+  width: 23px;
+  padding-right: 4px;
+}
 .LoginButton {
   background-color: white; 
   border: 2px solid black; 
@@ -102,4 +110,10 @@ img {
 
 .links a:hover {
   text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
 }

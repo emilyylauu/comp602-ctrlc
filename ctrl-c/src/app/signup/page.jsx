@@ -8,90 +8,132 @@ import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	// const [confirmPassword, setconfirmPassword] = useState("");
-	const [isRegistering, setIsRegistering] = useState(false);
-	const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-	const { userLoggedIn } = useAuth();
-	const router = useRouter();
+  const { userLoggedIn } = useAuth();
+  const router = useRouter();
 
-	const onSubmit = async (e) => {
-		e.preventDefault();
-		setErrorMessage("");
+  // Function to check for invalid words in the username
+  const containsInvalidWords = (username) => {
+    const invalidWords = ["fuck", "dick", "bastard", "nigger", "bitch"];
+    return invalidWords.some((word) => username.toLowerCase().includes(word));
+  };
 
-		try {
-			setIsRegistering(true);
-			await doCreateUserWithEmailAndPassword(username, email, password);
-			router.push("/"); // Redirect to home on success
-		} catch (error) {
-			setErrorMessage(error.message);
-		} finally {
-			setIsRegistering(false);
-		}
-	};
+  // Function to check email format
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
-	return (
-		<>
-			{userLoggedIn && redirect("/")}
-			<div className="BlueBox">
-				<div>
-					<title>Sign Up Page</title>
-				</div>
+  // Function to check password strength
+  const isValidPassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    return passwordRegex.test(password);
+  };
 
-				<div className="WhiteBox">
-					<h1>Sign Up</h1>
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
 
-					<div className="label-input-container">
-						<label>Username </label>
-						<input
-							className="inputs"
-							type="text"
-							placeholder="Username"
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-						/>
-					</div>
+    // Validate email format
+    if (!isValidEmail(email)) {
+      setErrorMessage("Invalid email format. Please enter a valid email.");
+      return;
+    }
 
-					<div className="label-input-container">
-						<label>Email </label>
-						<input
-							className="inputs"
-							type="email"
-							placeholder="Email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</div>
+    // Validate password strength
+    if (!isValidPassword(password)) {
+      setErrorMessage(
+        "Password must be at least 6 characters long and contain both letters and numbers."
+      );
+      return;
+    }
 
-					<div className="label-input-container">
-						<label>Password </label>
-						<input
-							className="inputs"
-							type="password"
-							placeholder="Password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</div>
+    // Validate username for invalid words
+    if (containsInvalidWords(username)) {
+      setErrorMessage(
+        "Username contains inappropriate words. Please try another."
+      );
+      return;
+    }
 
-					<button
-						className="SignupButton"
-						onClick={onSubmit}
-						disabled={isRegistering}
-					>
-						Sign Up
-					</button>
+    try {
+      setIsRegistering(true);
+      await doCreateUserWithEmailAndPassword(username, email, password);
+      router.push("/"); // Redirect to home on success
+    } catch (error) {
+      setErrorMessage("Invalid Username or Email or Password");
+    } finally {
+      setIsRegistering(false);
+    }
+  };
 
-					<div className="links">
-						<a href="/login">Back to login</a>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+  return (
+    <>
+      {userLoggedIn && redirect("/")}
+      <div className="BlueBox">
+        <div>
+          <title>Sign Up</title>
+        </div>
+
+        <div className="WhiteBox">
+          <h1>Sign Up</h1>
+
+          {/* Error Message Display */}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+          <div className="label-input-container">
+            <label>Username </label>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+
+          <div className="label-input-container">
+            <label>Email </label>
+            <input
+              className="inputs"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="label-input-container">
+            <label>Password </label>
+            <input
+              className="inputs"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button
+            className="SignupButton"
+            onClick={onSubmit}
+            disabled={isRegistering}
+          >
+            Sign Up
+          </button>
+
+          <div className="links">
+            <a href="/login">Back to login</a>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Signup;
