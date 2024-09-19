@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <div className={styles.background}>
-      {userLoggedIn && router.push("/")}
+      {userLoggedIn && router.push("/home")}
       <div className={styles.BlueBox}>
         <div>
           <title>Login</title>

@@ -1,23 +1,28 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faUser,
+  faCog,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "@/app/(component)/NavBar/navbar.module.css";
 
 // links on navbar
 const links = [
   { title: "Homepage", path: "/" },
-  { title: "Game", path: "/game" },
+  { title: "Game", path: "/pong" },
   { title: "Journal", path: "/journal" },
 ];
 
 const NavLink = ({ item }) => {
   const pathName = usePathname();
-  
+
   return (
     <Link
       href={item.path}
@@ -29,9 +34,9 @@ const NavLink = ({ item }) => {
 };
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
   // Profile dropdown state
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false); 
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const menuRef = useRef();
 
   // Close profile dropdown if clicked outside
@@ -42,9 +47,9 @@ const Navbar = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -60,7 +65,10 @@ const Navbar = () => {
 
         {/* Profile Picture */}
         <div className={styles.profileContainer} ref={menuRef}>
-          <div className={styles.menuTrigger} onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
+          <div
+            className={styles.menuTrigger}
+            onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+          >
             <Image
               src="/profile.jpg"
               alt="Profile Picture"
@@ -73,7 +81,11 @@ const Navbar = () => {
           {/* Dropdown menu */}
           {profileMenuOpen && (
             <div className={styles.dropdownMenu}>
-              <h3>Username<br /><span>@userID</span></h3>
+              <h3>
+                Username
+                <br />
+                <span>@userID</span>
+              </h3>
               <ul>
                 <li className={styles.dropdownItem}>
                   <FontAwesomeIcon icon={faUser} />
