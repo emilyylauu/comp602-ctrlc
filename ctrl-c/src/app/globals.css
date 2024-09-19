@@ -40,3 +40,38 @@ a {
     color-scheme: dark;
   }
 }
+
+:root{
+  --bg: #0d0c22;
+  --text: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+  --lightBlue: #92B5D8;
+  --softGreen: #93E9BE;
+  --softOrange: #F5B6A4;
+  --btn: #18a0e9;
+}
+
+:root{
+  --bg: #0d0c22;
+  --text: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+  --lightBlue: #92B5D8;
+  --softGreen: #93E9BE;
+  --softOrange: #F5B6A4;
+  --btn: #18a0e9;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--softGreen);
+  color: var(--text);
+  overflow-x: hidden;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
