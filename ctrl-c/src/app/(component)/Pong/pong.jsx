@@ -246,13 +246,16 @@ const Pong = () => {
           <button onClick={startGame} className={styles["start-button"]}>
             Start Game
           </button>
-          <button
-            onClick={backToHomePage}
-            className={styles["back-home-button"]}
-          >
-            {" "}
-            Back to Homepage
-          </button>
+
+          <a href="/home">
+            <button
+              onClick={backToHomePage}
+              className={styles["back-home-button"]}
+            >
+              {" "}
+              Back to Homepage
+            </button>
+          </a>
         </div>
       ) : (
         !isGamePaused && (
