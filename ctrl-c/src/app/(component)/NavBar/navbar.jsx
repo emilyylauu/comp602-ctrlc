@@ -91,7 +91,7 @@ const Navbar = () => {
 							<h3>
 								{user.displayName}
 								<br />
-								<span>@userID</span>
+								<span>{user.email}</span>
 							</h3>
 							<ul>
 								<li className={styles.dropdownItem}>
@@ -100,7 +100,9 @@ const Navbar = () => {
 								</li>
 								<li className={styles.dropdownItem}>
 									<FontAwesomeIcon icon={faSignOutAlt} />
-									<a href="/">Logout</a>
+									<a href="/" onClick={doSignOut}>
+										Logout
+									</a>
 								</li>
 								<li className={styles.dropdownItem}>
 									<FontAwesomeIcon icon={faCog} />

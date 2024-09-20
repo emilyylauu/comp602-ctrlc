@@ -10,6 +10,8 @@ export default function Home() {
 	const { userLoggedIn } = useAuth();
 	const router = useRouter();
 
+	console.log("is user logged in" + userLoggedIn);
+
 	return (
 		<div className={styles.container}>
 			{!userLoggedIn && router.push("/")}
