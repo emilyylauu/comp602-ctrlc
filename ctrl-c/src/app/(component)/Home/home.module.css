@@ -67,6 +67,8 @@
 	transform: scale(1.1);
 }
 
+/*responsive css*/
+
 /*Laptop View*/
 @media (max-width: 1015px) {
 	.title {
