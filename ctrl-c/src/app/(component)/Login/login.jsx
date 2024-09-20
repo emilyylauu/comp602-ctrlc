@@ -11,47 +11,59 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/(context)/auth";
 
 const Login = () => {
+	// Extract userLoggedIn state from the authentication context
 	const { userLoggedIn } = useAuth();
+	// Set up state variables for email, password, sign-in status, and error messages
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isSigningIn, setIsSigningIn] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+	// useRouter for redirecting users
 	const router = useRouter();
 
+	// Function to handle form submission for email and password login
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!isSigningIn) {
+			// Prevent multiple login attempts
 			setIsSigningIn(true);
 			try {
+				// Sign in using email and password
 				await doSignInWithEmailAndPassword(email, password);
 			} catch (error) {
+				// Display error message on failure
 				setErrorMessage(
 					"Incorrect email or password. Please try again!"
 				);
-				setIsSigningIn(false);
+				setIsSigningIn(false); // Reset signing-in state
 			}
 		}
 	};
 
+	// Function to handle sign-in with Google
 	const onGoogleSignIn = async (e) => {
 		e.preventDefault();
 
 		if (!isSigningIn) {
+			// Prevent multiple sign-in attempts
 			setIsSigningIn(true);
 			try {
+				// Sign in using Google
 				await doSignInWithGoogle();
 			} catch (error) {
+				// Display error message on failure
 				setErrorMessage(
 					"Failed to sign in with Google. Please try again."
-				); // Display error to the user
-				setIsSigningIn(false);
+				);
+				setIsSigningIn(false); // Reset signing-in state
 			}
 		}
 	};
 
 	return (
 		<div className={styles.background}>
+			{/* If user is logged in, redirect to the /home page */}
 			{userLoggedIn && router.push("/home")}
 			<div className={styles.BlueBox}>
 				<div>
@@ -68,13 +80,14 @@ const Login = () => {
 				<div className={styles.WhiteBox}>
 					<h3 className={styles.LoginText}>Login</h3>
 
-					{/* Error Message Display */}
+					{/* Display error message if there's any */}
 					{errorMessage && (
 						<div className={styles["error-message"]}>
 							{errorMessage}
 						</div>
 					)}
 
+					{/* Email Input */}
 					<div className={styles["label-input-container"]}>
 						<label className={styles.text}>Email</label>
 						<input
@@ -82,10 +95,11 @@ const Login = () => {
 							type="email"
 							placeholder="Email"
 							value={email}
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={(e) => setEmail(e.target.value)} // Updates email state
 						/>
 					</div>
 
+					{/* Password Input */}
 					<div className={styles["label-input-container"]}>
 						<div className={styles.text}>Password</div>
 						<input
@@ -93,15 +107,16 @@ const Login = () => {
 							type="password"
 							placeholder="Password"
 							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							onChange={(e) => setPassword(e.target.value)} // Updates password state
 						/>
 					</div>
 
+					{/* Sign In with Google Button */}
 					<div className={styles["label-input-container"]}>
 						<div className={styles.text}>Sign In With Google</div>
 						<button
 							className={styles.inputs}
-							onClick={onGoogleSignIn}
+							onClick={onGoogleSignIn} // Handles Google sign-in
 						>
 							<img
 								src="google.svg"
@@ -112,14 +127,16 @@ const Login = () => {
 						</button>
 					</div>
 
+					{/* Login Button */}
 					<button
 						className={styles.LoginButton}
-						onClick={onSubmit}
-						disabled={isSigningIn}
+						onClick={onSubmit} // Handles form submission for email and password
+						disabled={isSigningIn} // Disables the button when a sign-in attempt is in progress
 					>
 						Login
 					</button>
 
+					{/* Links for password reset and sign-up */}
 					<div className={styles.links}>
 						<a
 							href="/resetpass"
