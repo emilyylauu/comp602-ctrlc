@@ -1,0 +1,24 @@
+:root {
+	--bg: #0d0c22;
+	--text: rgb(0, 0, 0);
+	--white: rgb(255, 255, 255);
+	--lightBlue: #92b5d8;
+	--softGreen: #93e9be;
+	--softOrange: #f5b6a4;
+	--btn: #18a0e9;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: var(--softGreen);
+	color: var(--text);
+	overflow-x: hidden;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}

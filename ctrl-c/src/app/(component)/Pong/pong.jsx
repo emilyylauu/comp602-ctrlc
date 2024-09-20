@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import "./pong.css";
+import styles from "@/app/(component)/Pong/pong.module.css";
 
 const Pong = () => {
   const canvasRef = useRef(null);
@@ -105,10 +105,10 @@ const Pong = () => {
       ctx.textAlign = "center"; // Center the text horizontally
 
       // Display player's score on the left
-      ctx.fillText(playerScore, canvas.width / 4, canvas.height / 5); 
+      ctx.fillText(playerScore, canvas.width / 4, canvas.height / 5);
 
       // Display opponent's score on the right
-      ctx.fillText(computerScore, (3 * canvas.width) / 4, canvas.height / 5); 
+      ctx.fillText(computerScore, (3 * canvas.width) / 4, canvas.height / 5);
     };
 
     const resetBall = () => {
@@ -148,14 +148,21 @@ const Pong = () => {
       e.key === "ArrowDown" &&
       playerY < canvasRef.current.height - paddleHeight
     ) {
-      setPlayerY(Math.min(playerY + 20, canvasRef.current.height - paddleHeight));
+      setPlayerY(
+        Math.min(playerY + 20, canvasRef.current.height - paddleHeight)
+      );
     }
   };
 
   const handleMouseMove = (e) => {
     const canvas = canvasRef.current;
     const mouseY = e.clientY - canvas.getBoundingClientRect().top;
-    setPlayerY(Math.min(Math.max(mouseY - paddleHeight / 2, 0), canvas.height - paddleHeight));
+    setPlayerY(
+      Math.min(
+        Math.max(mouseY - paddleHeight / 2, 0),
+        canvas.height - paddleHeight
+      )
+    );
   };
 
   useEffect(() => {
@@ -219,46 +226,86 @@ const Pong = () => {
   return (
     <div>
       {showText && (
-        <div className="main-menu">
-          <h2 className="heading">Pong Game</h2>
-          <p className="welcome-text">Welcome to Pong Game! Use this game as a way to distract your mind through any stressful situation or simply for fun.
+        <div className={styles["main-menu"]}>
+          <h2 className={styles.heading}>Pong Game</h2>
+          <p className={styles["welcome-text"]}>
+            Welcome to Pong Game! Use this game as a way to distract your mind
+            through any stressful situation or simply for fun.
           </p>
 
-          <p className="welcome-text">Use the arrow keys or your mouse to control the paddle.</p>
-          <p className="welcome-text">Press 'Start Game' to begin!</p>
-          <img src="/images/game.png" width="270" alt="Journal Image" />
+          <p className={styles["welcome-text"]}>
+            Use the arrow keys or your mouse to control the paddle.
+          </p>
+          <p className={styles["welcome-text"]}>Press 'Start Game' to begin!</p>
+          <img src="game.png" width="270" alt="Journal Image" />
         </div>
       )}
 
       {!isGameRunning ? (
-        <div className="start-controls">
-          <button onClick={startGame} className="start-button">Start Game</button>
-          <button onClick={backToHomePage} className="back-home-button"> Back to Homepage</button>
+        <div className={styles["start-controls"]}>
+          <button onClick={startGame} className={styles["start-button"]}>
+            Start Game
+          </button>
+
+          <a href="/home">
+            <button
+              onClick={backToHomePage}
+              className={styles["back-home-button"]}
+            >
+              {" "}
+              Back to Homepage
+            </button>
+          </a>
         </div>
       ) : (
         !isGamePaused && (
-          <div className="controls">
-            <button onClick={pauseGame} className="pause-button">Pause</button>
+          <div className={styles.controls}>
+            <button onClick={pauseGame} className={styles["pause-button"]}>
+              Pause
+            </button>
           </div>
         )
       )}
 
       {isGamePaused && (
-        <div className="pause-menu">
+        <div className={styles["pause-menu"]}>
           <h2>Game Paused</h2>
-          <button onClick={resumeGame} className="pause-menu-button">Resume</button>
-          <button onClick={confirmRestart} className="pause-menu-button">Restart</button>
-          <button onClick={backToMainMenu} className="pause-menu-button"> Main Menu</button>
+          <button onClick={resumeGame} className={styles["pause-menu-button"]}>
+            Resume
+          </button>
+          <button
+            onClick={confirmRestart}
+            className={styles["pause-menu-button"]}
+          >
+            Restart
+          </button>
+          <button
+            onClick={backToMainMenu}
+            className={styles["pause-menu-button"]}
+          >
+            {" "}
+            Main Menu
+          </button>
         </div>
       )}
       {showRestartConfirm && (
-        <div className="confirm-dialog">
+        <div className={styles["confirm-dialog"]}>
           <p>Are you sure you want to restart the game?</p>
-          <button onClick={() => handleRestartConfirm(true)} className="confirm-button">Yes </button>
-          <button onClick={() => handleRestartConfirm(false)} className="confirm-button">No</button>
+          <button
+            onClick={() => handleRestartConfirm(true)}
+            className={styles["confirm-button"]}
+          >
+            Yes{" "}
+          </button>
+          <button
+            onClick={() => handleRestartConfirm(false)}
+            className={styles["confirm-button"]}
+          >
+            No
+          </button>
         </div>
       )}
-      <canvas ref={canvasRef} className="pong-canvas" />
+      <canvas ref={canvasRef} className={styles["pong-canvas"]} />
     </div>
   );
 };
