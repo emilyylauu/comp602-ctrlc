@@ -142,7 +142,7 @@ const Signup = () => {
 					</button>
 					{/* Link to return to login page */}
 					<div className={styles.links}>
-						<a href="/login">Back to login</a>
+						<a href="/">Back to login</a>
 					</div>
 				</div>
 			</div>
