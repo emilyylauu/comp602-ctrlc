@@ -1,0 +1,178 @@
+.container {
+	display: flex;
+	gap: 60px;
+	align-items: center;
+	padding: 20px;
+	flex-wrap: wrap;
+	overflow: hidden;
+}
+
+.textContainer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	margin: 5px;
+}
+
+.title {
+	font-size: 70px;
+	line-height: 1.2;
+}
+
+.desc {
+	font-size: 20px;
+}
+
+.buttons {
+	display: flex;
+	gap: 20px;
+}
+
+.button {
+	padding: 10px;
+	min-width: 120px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+}
+
+.button:first-child {
+	background-color: var(--btn);
+	color: var(--text);
+}
+
+.brands {
+	width: 500px;
+	height: 50px;
+	position: relative;
+	filter: grayscale(1);
+}
+
+.imgContainer {
+	flex: 1;
+	position: relative;
+	height: 400px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.heroImg {
+	object-fit: cover;
+	width: 100%;
+	height: auto;
+	max-height: 100%;
+	transform: scale(1.1);
+}
+
+/*responsive css*/
+
+/*Laptop View*/
+@media (max-width: 1015px) {
+	.title {
+		font-size: 58px;
+	}
+}
+
+/* Tablet View */
+@media (max-width: 868px) {
+	.container {
+		text-align: center;
+	}
+	.title {
+		font-size: 50px;
+	}
+
+	.imgContainer {
+		display: none;
+	}
+
+	.heroImg {
+		width: 100%;
+		transform: scale(1);
+	}
+
+	.buttons {
+		padding: 20px 50px 20px 50px;
+		flex-direction: column;
+		gap: 10px;
+	}
+}
+
+/* Mobile View */
+@media (max-width: 624px) {
+	.container {
+		flex-direction: column;
+		text-align: center;
+		padding: 20px;
+	}
+
+	.title {
+		font-size: 48px;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
+
+	.desc {
+		font-size: 15px;
+	}
+
+	.imgContainer {
+		margin: 20px 0;
+	}
+
+	.heroImg {
+		width: 80%;
+		transform: scale(1);
+	}
+	.nav {
+		display: block;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 10;
+	}
+}
+
+@media (max-width: 494px) {
+	.container {
+		flex-direction: column;
+		text-align: center;
+		padding: 20px;
+	}
+
+	.title {
+		font-size: 28px;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
+
+	.desc {
+		font-size: 10px;
+		padding: 5px 60px 0px 60px;
+	}
+
+	.imgContainer {
+		margin: 20px 0;
+	}
+
+	.heroImg {
+		width: 80%;
+		transform: scale(1);
+	}
+	.nav {
+		display: block;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 10;
+	}
+	.buttons {
+		font-size: 10px;
+		padding: 10px 70px 10px 70px;
+		flex-direction: column;
+		gap: 10px;
+	}
+}
