@@ -49,23 +49,6 @@
 	filter: grayscale(1);
 }
 
-.imgContainer {
-	flex: 1;
-	position: relative;
-	height: 400px;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.heroImg {
-	object-fit: cover;
-	width: 100%;
-	height: auto;
-	max-height: 100%;
-	transform: scale(1.1);
-}
 
 /*responsive css*/
 

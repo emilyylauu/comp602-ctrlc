@@ -13,18 +13,9 @@ export default function Home() {
 	// Redirect to homepage if not logged in
 	console.log("is user logged in: " + userLoggedIn);
 
-	return (
+	return ( 
 		<div className={styles.container}>
 			{!userLoggedIn && router.push("/")} {/* Redirect if not logged in */}
-			{/* Text and description section */}
-			<div className={styles.textContainer}>
-				<h1 className={styles.title}>Top platform for stress relief</h1>
-				<p className={styles.desc}>Our app combines journaling and games to help you unwind. Find calm and balance in one place.</p>
-			</div>
-			{/* Image section */}
-			<div className={styles.imgContainer}>
-				<Image src="/logo.svg" alt="Stress Relief Logo" fill className={styles.heroImg} />
-			</div>
 		</div>
 	);
 }

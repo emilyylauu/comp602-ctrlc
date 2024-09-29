@@ -18,25 +18,29 @@ import { doSignOut } from "../Firebase/auth";
 
 // links on navbar
 const links = [
-	{ title: "Homepage", path: "/" },
+	{ title: "Homepage", path: "/home" },
 	{ title: "Game", path: "/pong" },
 	{ title: "Journal", path: "/journal" },
 ];
 
 const NavLink = ({ item }) => {
-	const pathName = usePathname();
+    const pathName = usePathname();
 
-	return (
-		<Link
-			href={item.path}
-			className={`${styles.link} ${
-				pathName === item.path && styles.active
-			}`}
-		>
-			{item.title}
-		</Link>
-	);
+    return (
+        <Link href={item.path} passHref>
+            <button
+                className={`${styles.link} ${
+                    pathName === item.path ? styles.active : ""
+                }`}
+            >
+                {item.title}
+            </button>
+        </Link>
+    );
 };
+
+
+
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);

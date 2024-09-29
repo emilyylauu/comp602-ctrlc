@@ -26,7 +26,6 @@ const Signup = () => {
 
 	// Function to check email format
 	const isValidEmail = (email) => {
-		console.log("in isValid email" + email);
 		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		return emailRegex.test(email);
 	};
@@ -40,7 +39,6 @@ const Signup = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setErrorMessage("");
-		console.log(email);
 
 		// Validate email format
 		if (!isValidEmail(email)) {
@@ -79,12 +77,7 @@ const Signup = () => {
 
 	return (
 		<div className={styles.background}>
-			{/* {userLoggedIn && router.push("/")} */}
 			<div className={styles.BlueBox}>
-				<div>
-					<title>Sign Up</title>
-				</div>
-
 				<div className={styles.WhiteBox}>
 					<h1 className={styles.heading}>Sign Up</h1>
 
@@ -96,7 +89,7 @@ const Signup = () => {
 					)}
 
 					<div className={styles["label-input-container"]}>
-						<label>Username </label>
+						<label>Username</label>
 						<input
 							className={styles.inputs}
 							type="text"
@@ -107,7 +100,7 @@ const Signup = () => {
 					</div>
 
 					<div className={styles["label-input-container"]}>
-						<label>Email </label>
+						<label>Email</label>
 						<input
 							className={styles.inputs}
 							type="email"
@@ -129,7 +122,7 @@ const Signup = () => {
 					</div>
 
 					<button
-						className={styles.SignupButton}
+						className={styles.LoginButton}
 						onClick={onSubmit}
 						disabled={isRegistering}
 					>
@@ -137,7 +130,7 @@ const Signup = () => {
 					</button>
 
 					<div className={styles.links}>
-						<a href="/login">Back to login</a>
+						<a href="/">Back to login</a>
 					</div>
 				</div>
 			</div>

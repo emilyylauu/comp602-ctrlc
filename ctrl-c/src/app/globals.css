@@ -1,12 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
 :root {
-	--bg: #0d0c22;
-	--text: rgb(0, 0, 0);
-	--white: rgb(255, 255, 255);
-	--lightBlue: #92b5d8;
-	--softGreen: #93e9be;
-	--softOrange: #f5b6a4;
-	--btn: #18a0e9;
+	--text: #333333;
+	/*background color*/
+	--PalePeach: #FFD1C1;
+	/*icons, buttons, or headers*/
+	--PastelPink: #FFCEDA;
+	/*Highlight*/
+	--SoftLemonYellow: #FFF5B7;
+	/*secondary background or cards*/
+	--SkyBlue: #C7E5FF;
+	/*buttons*/
+	--PastelMint:#C6F6D5;
+	/*white*/
+	--white: white;
+	/*light brown*/
+	--lightbrown: #D2B48C;
+	/*coffebrown*/
+	--coffeebrown: #4B3621;
 }
+
 * {
 	margin: 0;
 	padding: 0;
@@ -14,9 +27,10 @@
 }
 
 body {
-	background-color: var(--softGreen);
+	background-color: var(--SoftLemonYellow);
 	color: var(--text);
 	overflow-x: hidden;
+	cursor: url('/cursor.png'), auto;
 }
 a {
 	text-decoration: none;

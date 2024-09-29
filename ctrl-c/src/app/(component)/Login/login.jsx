@@ -53,20 +53,23 @@ const Login = () => {
 	return (
 		<div className={styles.background}>
 			{userLoggedIn && router.push("/home")}
-			<div className={styles.BlueBox}>
-				<div>
-					<title>Login</title>
-				</div>
-				<div>
-					<div>
-						<h1 className={styles.heading}>Welcome to Blank Web</h1>
+			<div className={styles.SignupContainer}>
+				<div className={styles.textContainer}>
+					<h1 className={styles.title}>Welcome to Blank Web</h1>
+					<p className={styles.desc}>
+						Our app combines journaling and games to help you unwind.
+					</p>
+					<p className={styles.desc}>
+						Find calm and balance in one place.
+					</p>
+					<div className={styles.socialIcons}>
+						{/* Add social media icons here */}
 					</div>
-
-					<img className={styles.image} src="logo.svg" alt="logo" />
 				</div>
-
-				<div className={styles.WhiteBox}>
-					<h3 className={styles.LoginText}>Login</h3>
+				<div className={styles.FormContainer}>
+					<div>
+						<h3 className={styles.heading}>Login</h3>
+					</div>
 
 					{/* Error Message Display */}
 					{errorMessage && (
@@ -113,7 +116,7 @@ const Login = () => {
 					</div>
 
 					<button
-						className={styles.LoginButton}
+						className={styles.SignupButton}
 						onClick={onSubmit}
 						disabled={isSigningIn}
 					>
@@ -127,8 +130,9 @@ const Login = () => {
 						>
 							Forgot password?
 						</a>
+						<br></br>
 						<a href="/sign-up" className={styles.signup}>
-							Can't login? Sign up
+							Can't login? Sign up 
 						</a>
 					</div>
 				</div>
