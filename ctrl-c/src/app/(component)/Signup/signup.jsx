@@ -7,38 +7,55 @@ import { useRouter } from "next/navigation";
 import { doCreateUserWithEmailAndPassword } from "../Firebase/auth";
 
 const Signup = () => {
+	// State variables to handle username, email, password, registration status, and error messages
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isRegistering, setIsRegistering] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 
+	// Extract userLoggedIn state from the authentication context
 	const { userLoggedIn } = useAuth();
+	// useRouter for redirecting
 	const router = useRouter();
 
 	// Function to check for invalid words in the username
 	const containsInvalidWords = (username) => {
+		// List of inappropriate words that should not be included in the username
 		const invalidWords = ["fuck", "dick", "bastard", "bitch"];
 		return invalidWords.some((word) =>
 			username.toLowerCase().includes(word)
 		);
 	};
 
-	// Function to check email format
+	// Function to check if the email format is valid
 	const isValidEmail = (email) => {
+<<<<<<< HEAD
+=======
+		console.log("in isValid email" + email); // For debugging
+		// regex for validating email format
+>>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		return emailRegex.test(email);
 	};
 
-	// Function to check password strength
+	// Function to check if the password is strong enough
 	const isValidPassword = (password) => {
+		// Password should be at least 6 characters long and contain letters and numbers
 		const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 		return passwordRegex.test(password);
 	};
 
+	// Function to handle form submission and user registration
 	const onSubmit = async (e) => {
+<<<<<<< HEAD
 		e.preventDefault();
 		setErrorMessage("");
+=======
+		e.preventDefault(); // Prevents page refresh on form submission
+		setErrorMessage(""); // Clear previous error messages
+		console.log(email);
+>>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 
 		// Validate email format
 		if (!isValidEmail(email)) {
@@ -67,7 +84,7 @@ const Signup = () => {
 		try {
 			setIsRegistering(true);
 			await doCreateUserWithEmailAndPassword(username, email, password);
-			router.push("/"); // Redirect to home on success
+			router.push("/");
 		} catch (error) {
 			setErrorMessage("Invalid Username or Email or Password");
 		} finally {
@@ -77,17 +94,19 @@ const Signup = () => {
 
 	return (
 		<div className={styles.background}>
+<<<<<<< HEAD
+=======
+			{userLoggedIn && router.push("/home")}
+>>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 			<div className={styles.BlueBox}>
 				<div className={styles.WhiteBox}>
 					<h1 className={styles.heading}>Sign Up</h1>
-
-					{/* Error Message Display */}
 					{errorMessage && (
 						<div className={styles["error-message"]}>
 							{errorMessage}
 						</div>
 					)}
-
+					{/* Username Input Field */}
 					<div className={styles["label-input-container"]}>
 						<label>Username</label>
 						<input
@@ -98,7 +117,7 @@ const Signup = () => {
 							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</div>
-
+					{/* Email Input Field */}
 					<div className={styles["label-input-container"]}>
 						<label>Email</label>
 						<input
@@ -109,7 +128,7 @@ const Signup = () => {
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
-
+					{/* Password Input Field */}
 					<div className={styles["label-input-container"]}>
 						<label>Password</label>
 						<input
@@ -120,7 +139,7 @@ const Signup = () => {
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
-
+					{/* Submit Button */}
 					<button
 						className={styles.LoginButton}
 						onClick={onSubmit}
@@ -128,7 +147,7 @@ const Signup = () => {
 					>
 						Sign Up
 					</button>
-
+					{/* Link to return to login page */}
 					<div className={styles.links}>
 						<a href="/">Back to login</a>
 					</div>
