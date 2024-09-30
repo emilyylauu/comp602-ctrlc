@@ -37,7 +37,7 @@ const Journal = () => {
           <button className="button">Past Entries</button> {/* Button linking to past entries page */}
         </a>
 
-        <a href="/home-page">
+        <a href="/">
           <button className="button">Back to Homepage</button> {/* Button linking back to the homepage */}
           
         </a>
