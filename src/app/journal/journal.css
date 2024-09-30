@@ -1,0 +1,99 @@
+
+body {
+    background-color: #93E9BE; /* Light green background color */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of the viewport */
+  }
+  
+  /* Styling for the journal container */
+  .journal-container {
+    width: 1000px;
+    background-color: #92B5D8; /* Light blue background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  /* Header styling */
+  .journal-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Content styling */
+  .journal-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  /* Image container styling */
+  .image-container {
+    flex: 1;
+    text-align: left;
+  }
+  
+  /* Text container styling */
+  .text-container {
+    flex: 2;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Styling for the icon wrapper */
+  .icon-wrapper {
+    position: relative; /* Set position relative to allow absolute positioning of child elements */
+    display: inline-block; /* Keep the wrapper inline */
+    width: 70px; /* Width of the paw image */
+    height: 70px; /* Height of the paw image */
+  }
+  
+ /* Styling for the + icon */
+.plus-icon {
+    position: absolute; /* Position absolute to place on top of the paw */
+    top: 30px; /* Adjust the position vertically to align with the paw */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, 0); /* Adjust position to center both horizontally and vertically */
+    font-size: 30px; /* Font size of the + symbol */
+    font-weight: bold; /* Bold text for + */
+    color: #fff; /* Change color of the + symbol to white */
+    border-radius: 50%; /* Round background */
+    display: flex; /* Center the + symbol inside the circle */
+    justify-content: center; /* Center horizontally */
+  }
+  
+  
+  /* Styling for the paw image */
+  .icon-wrapper img {
+    width: 100%; /* Full width of the wrapper */
+  }
+  
+  /* Button container styling */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Button styling */
+  .button {
+    background-color: #7d4c7d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+
+
+  }
+  
+  .button:hover {
+    background-color: #6c3e6c; /* Darker shade on hover */
+  }
+  

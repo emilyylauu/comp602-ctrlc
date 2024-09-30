@@ -1,0 +1,123 @@
+/* Apply background color to the entire page */
+body {
+    background-color: #93E9BE; /* Light green background color */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of the viewport */
+  }
+  
+  /* Styling for the new entry container */
+  .new-entry-container {
+    width: 800px;
+    background-color: #92B5D8; /* Light blue background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  
+  /* Styling for the title input */
+  .title-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  
+  
+  
+  /* Header styling */
+  .new-entry-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Container for date selectors */
+  .date-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between date dropdowns */
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for date selectors */
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  /* Textarea styling */
+  textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Button container styling */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Button styling */
+  .button {
+    background-color: #7d4c7d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .button:hover {
+    background-color: #6c3e6c; /* Darker shade on hover */
+  }
+  /* Styling for the category container */
+  .category-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping of buttons */
+    gap: 30px; /* Increase space between buttons */
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the category buttons */
+  .category-button {
+    background-color: #7d4c7d; /* Button background color */
+    color: white;
+    border: none;
+    padding: 13px; /* Increase padding for a larger button */
+    border-radius: 50%; /* Make the button round */
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px; /* Font size for button text */
+    width: 120px; /* Fixed width for a round shape */
+    height: 120px; /* Fixed height for a round shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 6px #6c3e6c, 0 0 0 12px #7d4c7d; /* Add squiggly effect */
+    transition: transform 0.2s; /* Smooth animation for squiggly effect */
+  }
+  
+  .category-button:hover {
+    transform: rotate(5deg); /* Slight rotation for squiggly effect on hover */
+    background-color: #6c3e6c; /* Darker shade on hover */
+  }
+  
