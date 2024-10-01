@@ -33,9 +33,7 @@ const Login = () => {
 				await doSignInWithEmailAndPassword(email, password);
 			} catch (error) {
 				// Display error message on failure
-				setErrorMessage(
-					"Incorrect email or password. Please try again!"
-				);
+				setErrorMessage("Incorrect email or password. Please try again!");
 				setIsSigningIn(false); // Reset signing-in state
 			}
 		}
@@ -53,9 +51,7 @@ const Login = () => {
 				await doSignInWithGoogle();
 			} catch (error) {
 				// Display error message on failure
-				setErrorMessage(
-					"Failed to sign in with Google. Please try again."
-				);
+				setErrorMessage("Failed to sign in with Google. Please try again.");
 				setIsSigningIn(false); // Reset signing-in state
 			}
 		}
@@ -71,9 +67,7 @@ const Login = () => {
 					<p className={styles.desc}>
 						Our app combines journaling and games to help you unwind.
 					</p>
-					<p className={styles.desc}>
-						Find calm and balance in one place.
-					</p>
+					<p className={styles.desc}>Find calm and balance in one place.</p>
 					<div className={styles.socialIcons}>
 						{/* Add social media icons here */}
 					</div>
@@ -85,9 +79,7 @@ const Login = () => {
 
 					{/* Display error message if there's any */}
 					{errorMessage && (
-						<div className={styles["error-message"]}>
-							{errorMessage}
-						</div>
+						<div className={styles["error-message"]}>{errorMessage}</div>
 					)}
 
 					{/* Email Input */}
@@ -132,30 +124,21 @@ const Login = () => {
 
 					{/* Login Button */}
 					<button
-<<<<<<< HEAD
-						className={styles.SignupButton}
-						onClick={onSubmit}
-						disabled={isSigningIn}
-=======
 						className={styles.LoginButton}
 						onClick={onSubmit} // Handles form submission for email and password
 						disabled={isSigningIn} // Disables the button when a sign-in attempt is in progress
->>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 					>
 						Login
 					</button>
 
 					{/* Links for password reset and sign-up */}
 					<div className={styles.links}>
-						<a
-							href="/resetpass"
-							className={styles["forgot-password"]}
-						>
+						<a href="/resetpass" className={styles["forgot-password"]}>
 							Forgot password?
 						</a>
 						<br></br>
 						<a href="/sign-up" className={styles.signup}>
-							Can't login? Sign up 
+							Can't login? Sign up
 						</a>
 					</div>
 				</div>

@@ -23,18 +23,13 @@ const Signup = () => {
 	const containsInvalidWords = (username) => {
 		// List of inappropriate words that should not be included in the username
 		const invalidWords = ["fuck", "dick", "bastard", "bitch"];
-		return invalidWords.some((word) =>
-			username.toLowerCase().includes(word)
-		);
+		return invalidWords.some((word) => username.toLowerCase().includes(word));
 	};
 
 	// Function to check if the email format is valid
 	const isValidEmail = (email) => {
-<<<<<<< HEAD
-=======
 		console.log("in isValid email" + email); // For debugging
 		// regex for validating email format
->>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		return emailRegex.test(email);
 	};
@@ -48,20 +43,13 @@ const Signup = () => {
 
 	// Function to handle form submission and user registration
 	const onSubmit = async (e) => {
-<<<<<<< HEAD
-		e.preventDefault();
-		setErrorMessage("");
-=======
 		e.preventDefault(); // Prevents page refresh on form submission
 		setErrorMessage(""); // Clear previous error messages
 		console.log(email);
->>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 
 		// Validate email format
 		if (!isValidEmail(email)) {
-			setErrorMessage(
-				"Invalid email format. Please enter a valid email."
-			);
+			setErrorMessage("Invalid email format. Please enter a valid email.");
 			return;
 		}
 
@@ -94,17 +82,12 @@ const Signup = () => {
 
 	return (
 		<div className={styles.background}>
-<<<<<<< HEAD
-=======
 			{userLoggedIn && router.push("/home")}
->>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 			<div className={styles.BlueBox}>
 				<div className={styles.WhiteBox}>
 					<h1 className={styles.heading}>Sign Up</h1>
 					{errorMessage && (
-						<div className={styles["error-message"]}>
-							{errorMessage}
-						</div>
+						<div className={styles["error-message"]}>{errorMessage}</div>
 					)}
 					{/* Username Input Field */}
 					<div className={styles["label-input-container"]}>
