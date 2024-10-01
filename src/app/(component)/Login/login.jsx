@@ -132,15 +132,9 @@ const Login = () => {
 
 					{/* Login Button */}
 					<button
-<<<<<<< HEAD
 						className={styles.SignupButton}
 						onClick={onSubmit}
 						disabled={isSigningIn}
-=======
-						className={styles.LoginButton}
-						onClick={onSubmit} // Handles form submission for email and password
-						disabled={isSigningIn} // Disables the button when a sign-in attempt is in progress
->>>>>>> b8cea48b5f77cbbb86823cd2252d0e96115031ba
 					>
 						Login
 					</button>
