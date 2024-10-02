@@ -81,7 +81,7 @@ const Navbar = () => {
 						onClick={() => setProfileMenuOpen(!profileMenuOpen)}
 					>
 						<Image
-							src="/profile.jpg"
+							src="/profile.png"
 							alt="Profile Picture"
 							width={50}
 							height={50}

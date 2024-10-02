@@ -1,6 +1,6 @@
 'use client'; // Ensure client-side rendering
 
-import { db } from '../firebase/firebaseConfig';
+import { db } from "../(component)/Firebase/firebase";
 import React, { useState, useRef } from "react";
 import { collection, addDoc } from 'firebase/firestore';
 import NavBar from "../(component)/NavBar/navbar"; 
