@@ -15,7 +15,7 @@ const Breath = () => {
   const [volume, setVolume] = useState(0.5); // Default volume (50%)
 
   // Use useRef to store the Audio object persistently
-  const meditationMusicRef = useRef(new Audio('/music/meditation.mp3')); // Access meditation.mp3 from the public folder
+  const meditationMusicRef = useRef(new Audio("/music/meditation.mp3")); // Access meditation.mp3 from the public folder
 
   // Handle user input for total session duration
   const handleTimeChange = (minutes) => {
