@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 /* Container for the entire page */
 .background {
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
+=======
+.background {
+  background-color: #93E9BE; 
+  margin: 0; 
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   overflow: hidden;
   background-image: url("/background.png"); /* Use your yellow background */
   background-size: cover;
@@ -78,11 +85,55 @@
 .inputs:focus {
   outline: none;
   border-color: #ff6b35;
+=======
+}
+
+
+.heading {
+  text-align: center;
+  font-size: 36px;
+  color: #333;
+}
+
+.BlueBox {
+  background-color: #92B5D8;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 1000px; 
+  height: auto;
+  padding: 50px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.WhiteBox {
+  background-color: white;
+  width: 500px;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs {
+  background-color: white; 
+  border: 2px solid black; 
+  border-radius: 5px; 
+  padding: 10px; 
+  font-size: 16px; 
+  margin-top: 10px;
+  cursor: pointer; 
+  box-sizing: border-box;
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7
 }
 
 .label-input-container {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   width: 100%;
   margin-top: 20px;
 }
@@ -127,10 +178,56 @@
 }
 
 /* Error Message Styling */
+=======
+  width: 100%; 
+  margin-bottom: 15px; 
+}
+
+.label-input-container label {
+  margin-bottom: 5px; 
+  text-align: left; 
+}
+
+.SignupButton {
+  background-color: white; 
+  border: 2px solid black; 
+  margin-top: 20px;
+  border-radius: 5px; 
+  padding: 10px;
+  width: 100%;
+  font-size: 16px; 
+  cursor: pointer; 
+  box-sizing: border-box;
+}
+
+.SignupButton:hover{
+  background-color: rgba(0, 0, 0, 0.183);
+  opacity: 0.8;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.links {
+  text-align: center;
+  margin-top: 20px;
+  display: block;
+  color: #333;
+  font-size: 0.8em;
+  margin: 5px 0;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
+
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7
 .error-message {
   color: red;
   padding-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7

@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 /* Container for the entire page */
 .background {
   position: relative;
   width: 100%;
+=======
+
+.background {
+  background-color: #93E9BE; 
+  margin: 0; 
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   overflow: hidden;
 }
 
@@ -200,12 +208,124 @@
 .links a:hover {
   text-decoration: underline; 
   color: #ff6b35; 
+=======
+} 
+
+.heading {
+  display: flex;
+  justify-content: center;
+  margin-right: 35px; 
+  font-weight: 700;
+  color: #333;
+}
+
+.image {
+  max-width: 400px;
+  display: block;
+  padding-right: 50px;
+}
+
+.BlueBox {
+  background-color: #92B5D8;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 1000px; 
+  height: auto;
+  padding: 50px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.LoginText {
+  font-size: 25px;
+}
+
+.WhiteBox {
+  background-color: white;
+  width: 500px;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 500px;
+}
+
+.inputs {
+  background-color: white; 
+  border: 2px solid black; 
+  border-radius: 5px; 
+  padding: 10px; 
+  font-size: 16px; 
+  margin-top: 10px;
+  cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.label-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  margin-bottom: 15px; 
+}
+
+.label-input-container label {
+  margin-bottom: 5px; 
+  text-align: left; 
+}
+.googleicon{
+  width: 23px;
+  padding-right: 4px;
+}
+.LoginButton {
+  background-color: white; 
+  border: 2px solid black; 
+  margin-top: 20px;
+  border-radius: 5px; 
+  padding: 10px;
+  width: 100%;  
+  font-size: 16px; 
+  cursor: pointer; 
+}
+
+.LoginButton:hover{
+  background-color: rgba(0, 0, 0, 0.183);
+  opacity: 0.8;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.links a {
+  display: block;
+  color: #333;
+  font-size: 0.8em;
+  text-decoration: none;
+  margin: 5px 0;
+}
+
+.links a:hover {
+  text-decoration: underline;
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7
 }
 
 .error-message {
   color: red;
+<<<<<<< HEAD
   padding-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
 }
 
+=======
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7

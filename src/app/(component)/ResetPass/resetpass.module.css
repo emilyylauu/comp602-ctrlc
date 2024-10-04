@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Container for the entire page */
 .background {
   display: flex;
@@ -130,3 +131,62 @@
   margin-bottom: 10px;
   font-size: 14px;
 }
+=======
+.background {
+  background-color: #92B5D8;
+  margin: 0; 
+  height: 100vh;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.WhiteBox {
+  background-color: white;
+  width: 450px;
+  height: 350px;
+  border-radius: 10px;
+  padding: 30px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.para {
+  padding-top: 10px;
+}
+
+.inputs {
+  background-color: white; 
+  border: 2px solid black; 
+  margin-top: 20px;
+  border-radius: 5px; 
+  padding: 10px;
+  width: 95%;  
+  cursor: pointer; 
+}
+
+.SubmitButton {
+  background-color: white; 
+  border: 2px solid black; 
+  margin-top: auto;
+  border-radius: 10px; 
+  padding: 10px;
+  width: 100%;  
+  font-size: 16px; 
+  cursor: pointer; 
+}
+
+.links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.error-message, .success-message {
+  padding-top: 5px;
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+>>>>>>> f7b58342267fe2b69c4f1f2f1a804a351c5cc7b7
